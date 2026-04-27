@@ -26,7 +26,6 @@ cmsc-313-project2/
 From the root of the repository, run:
 
 ```bash
-mkdir -p build
 as -o build/double.o src/double.s
 ld -o build/double build/double.o
 ./build/double
