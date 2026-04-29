@@ -30,3 +30,7 @@ as -o build/double.o src/double.s
 ld -o build/double build/double.o
 ./build/double
 ```
+
+## Testing
+
+Although not explicitly required, a small amount of unit tests were completed and the results are documented in ```bash docs/testing.md```
