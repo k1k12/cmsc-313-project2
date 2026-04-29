@@ -13,7 +13,7 @@ echo "0" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 0
+The double is: 0
 ```
 
 Result: Pass
@@ -31,7 +31,7 @@ echo "1" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 2
+The double is: 2
 ```
 
 Result: Pass
@@ -49,7 +49,7 @@ echo "42" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 84
+The double is: 84
 ```
 
 Result: Pass
@@ -67,7 +67,7 @@ echo "67676767" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 135353534
+The double is: 135353534
 ```
 
 Result: Pass
@@ -85,7 +85,7 @@ echo "100000000000000000000" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 15532559262904483840
+The double is: 15532559262904483840
 ```
 
 Expected mathematical result:
@@ -107,14 +107,14 @@ echo "-1" | ./build/double
 Output:
 
 ```text
-Enter a number: The double is: 15532559262904483840
+The double is: 15532559262904483840
 ```
 
 Expected mathematical result:
 
 ```text
 -2
-``
+```
 
 Result: Fail because program assumes int is a digit from 0 to 9
 
