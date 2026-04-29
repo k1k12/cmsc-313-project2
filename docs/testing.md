@@ -1,7 +1,5 @@
 # Testing
 
-## Test Cases
-
 ### Test 1: Input 0
 
 Command:
