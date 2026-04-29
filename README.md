@@ -2,7 +2,7 @@
 
 ## Description
 
-This program implements an assembly language program that 
+Implements an assembly language program that 
 reads from the command line a number, doubles that number, 
 and then prints out "The double is: " and the doubled number.
 
@@ -16,14 +16,14 @@ cmsc-313-project2/
 │   └── double.o
 │   └── double
 ├── docs/
-│   └── ehhh tbd might delete
+│   └── testing.md
 ├── README.md
-└── .gitignore # build and executable files are ignored
+└── .gitignore
 ```
 
 ## How to Run
 
-From the root of the repository, run:
+From the root of the repository run:
 
 ```bash
 as -o build/double.o src/double.s
