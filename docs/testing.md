@@ -86,13 +86,13 @@ Output:
 The double is: 15532559262904483840
 ```
 
-Expected mathematical result:
+Expected result:
 
 ```text
 200000000000000000000
 ```
 
-Result: Fail because rax is only 64 bits
+Result: Fail because rax register is only 64 bits and the correct output would be larger
 
 ### Test 6: Negative Input
 
@@ -115,8 +115,6 @@ Expected mathematical result:
 ```
 
 Result: Fail because program assumes int is a digit from 0 to 9
-
-
 
 ## Summary
 
