@@ -108,7 +108,7 @@ Output:
 The double is: 15532559262904483840
 ```
 
-Expected mathematical result:
+Expected result:
 
 ```text
 -2
