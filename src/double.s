@@ -2,11 +2,11 @@
 
 .section .data
 prompt:
-  .ascii "Enter no -> "
+  .ascii "Enter a number: "
 prompt_length = . - prompt
 
 output:
-  .ascii "number is -> "
+  .ascii "The double is: "
 output_length = . - output
 
 .section .bss
@@ -17,19 +17,27 @@ input:
 .globl _start
 
 _start:
-  # write 1 prompt prompt_length
+  # Print prompt
   mov $1, %rax # syscall number for write
   movq $1, %rdi # 1 = stdout
   movq $prompt, %rsi # addr msg
   movq $prompt_length, %rdx # length odf mgg
   syscall
 
-  # read 0 input prompt_length
+  # Read input
   movq $0, %rax # syscall num for read
   movq $0, %rdi # 0 = stdin
   movq $input, %rsi # buffer
   movq $32, %rdx # max bytes to read
   syscall
+
+  # Conv toi nt 
+
+  # Double number
+
+  # Conv to ascii
+
+  # Save output pointer
 
   # save no bytes read
   movq %rax, %r8
