@@ -33,4 +33,4 @@ ld -o build/double build/double.o
 
 ## Testing
 
-Although not explicitly required, a small amount of unit tests were completed and the results are documented in ```bash docs/testing.md```
+Although not explicitly required, a small amount of unit tests were completed and the results are documented in ```docs/testing.md```
