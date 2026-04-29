@@ -5,12 +5,15 @@ prompt:
   .ascii "Enter a number: "
 prompt_length = . - prompt
 
-output:
+result:
   .ascii "The double is: "
-output_length = . - output
+result_length = . - result
 
 .section .bss
 input:
+  .skip 32
+
+output:
   .skip 32
 
 .section .text
@@ -20,43 +23,80 @@ _start:
   # Print prompt
   mov $1, %rax # syscall number for write
   movq $1, %rdi # 1 = stdout
-  movq $prompt, %rsi # addr msg
-  movq $prompt_length, %rdx # length odf mgg
+  movq $prompt, %rsi # address of prompt
+  movq $prompt_length, %rdx # length of prompt
   syscall
 
   # Read input
-  movq $0, %rax # syscall num for read
+  movq $0, %rax # syscall number for read
   movq $0, %rdi # 0 = stdin
-  movq $input, %rsi # buffer
+  movq $input, %rsi # input buffer
   movq $32, %rdx # max bytes to read
   syscall
 
-  # Conv toi nt 
+  movq $input, %rsi # rsi points to input
+  xorq %rax, %rax  # rax will store integer
 
-  # Double number
+  ascii_to_int:
+    # Convert ascii to ascii 
+    movzbq (%rsi), %rbx # load one input char into rbx
+    cmpq $10, %rbx
+    je double_number
 
-  # Conv to ascii
+    cmpq $0, %rbx
+    je double_number
 
-  # Save output pointer
+    subq $48, %rbx # convert ascii to int
+    imulq $10, %rax # current num * 10
+    addq %rbx, %rax # current number + int
 
-  # save no bytes read
-  movq %rax, %r8
+    incq %rsi # move to next char
+    jmp ascii_to_int
 
-  # write 1 output output_length
-  mov $1, %rax # syscall number for write
-  movq $1, %rdi # 1 = stdout
-  movq $output, %rsi # addr msg
-  movq $output_length, %rdx # length odf mgg
-  syscall
+  double_number:
+    # Double number
+    addq %rax, %rax # rax = rax * 2
+    
+    # Convert int to ascii
+    movq $output + 31, %rsi # point to end of output buffer
+    movb $0, (%rsi) # null terminate
+    movq $10, %rbx # divisor
 
-  # write 1 prompt prompt_length
-  mov $1, %rax # syscall number for write
-  movq $1, %rdi # 1 = stdout
-  movq $input, %rsi # addr msg
-  movq %r8, %rdx # length odf mgg
-  syscall
+  int_to_ascii:
+    # Convert int to ascii
+    xorq %rdx, %rdx # clear rdx
+    divq %rbx # divide rax by 10
 
-  # exit
-  mov $60, %rax # this is syscall no for exit
-  xor %rdi, %rdi # exit status 0
-  syscall
+    addb $48, %dl # convert to ascii whats left
+    decq %rsi # go back in output buffer
+    movb %dl, (%rsi) # store
+
+    cmpq $0, %rax
+    jne int_to_ascii
+
+    # Calculate number of bytes in output number
+    movq $output + 31, %rdx
+    subq %rsi, %rdx # rdx = output length
+
+    # Save output pointer and length
+    movq %rsi, %r8
+    movq %rdx, %r9
+
+    # Print result message
+    mov $1, %rax # syscall number for write
+    movq $1, %rdi # 1 = stdout
+    movq $result, %rsi # address of result
+    movq $result_length, %rdx # length of result
+    syscall
+
+    # Print doubled number
+    mov $1, %rax # syscall number for write
+    movq $1, %rdi # 1 = stdout
+    movq %r8, %rsi # address of output number
+    movq %r9, %rdx # length of output number
+    syscall
+
+    # Exit
+    mov $60, %rax # syscall exit
+    xor %rdi, %rdi # exit status 0
+    syscall
